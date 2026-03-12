@@ -1,7 +1,23 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TaskManager_Backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 // register services
+
+// Replace 'YourDbContext' with the name of your own DbContext derived class.
+builder.Services.AddDbContext<AppDbContext>(
+    dbContextOptions => dbContextOptions
+        .UseMySql("server=localhost;user=root;password=root;database=taskmanager", 
+        new MySqlServerVersion(new Version(8, 0, 35)))
+        // The following three options help with debugging, but should
+        // be changed or removed for production.
+        .LogTo(Console.WriteLine, LogLevel.Information)
+        .EnableSensitiveDataLogging()
+        .EnableDetailedErrors()
+);
+
+
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(options =>
 {
