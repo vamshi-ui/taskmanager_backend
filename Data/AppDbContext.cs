@@ -16,11 +16,11 @@ public class AppDbContext: DbContext
    {
       modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
-      modelBuilder.Entity<Role>().HasData(new Role
-      {
-         Name = "Admin",
-         Id=1
-      });
+      // modelBuilder.Entity<Role>().HasData(new Role
+      // {
+      //    Name = "Admin",
+      //    Id=1
+      // });
    }
 
     public DbSet<User> Users {get; set;}
