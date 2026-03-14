@@ -5,10 +5,9 @@ using TaskManager_Backend.Data;
 var builder = WebApplication.CreateBuilder(args);
 // register services
 
-// Replace 'YourDbContext' with the name of your own DbContext derived class.
 builder.Services.AddDbContext<AppDbContext>(
     dbContextOptions => dbContextOptions
-        .UseMySql("server=localhost;user=root;password=root;database=taskmanager", 
+        .UseMySql(builder.Configuration["ConnectionString"], 
         new MySqlServerVersion(new Version(8, 0, 35)))
         // The following three options help with debugging, but should
         // be changed or removed for production.
