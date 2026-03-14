@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager_Backend.Data;
 
@@ -11,9 +12,11 @@ using TaskManager_Backend.Data;
 namespace TaskManager_Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260314135751_rolecreatedDate")]
+    partial class rolecreatedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,22 +83,6 @@ namespace TaskManager_Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tb_user_roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2026, 3, 14, 19, 40, 56, 149, DateTimeKind.Local).AddTicks(7661),
-                            Description = "Admin for Task Manager",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2026, 3, 14, 19, 40, 56, 150, DateTimeKind.Local).AddTicks(8819),
-                            Description = "User for Task Manager",
-                            Name = "User"
-                        });
                 });
 
             modelBuilder.Entity("TaskManager.UserModels.User", b =>
