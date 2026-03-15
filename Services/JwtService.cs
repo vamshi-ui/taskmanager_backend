@@ -21,7 +21,7 @@ public JwtService(IConfiguration config)
         {
         new Claim(ClaimTypes.Name, user.UserName),
         new Claim(ClaimTypes.Email, user.Email),
-        new Claim("RoleId", user.RoleId.ToString())
+        new Claim(ClaimTypes.Role, user.RoleId.ToString())
     };
 
 

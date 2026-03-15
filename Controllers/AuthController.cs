@@ -1,5 +1,6 @@
 
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TaskManager_Backend.DTOS;
@@ -26,6 +27,7 @@ namespace TaskManager_Backend.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         #region Register Api
+    [AllowAnonymous]
         [HttpPost("[action]")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest user)
         {
@@ -49,25 +51,26 @@ namespace TaskManager_Backend.Controllers
         }
         #endregion
 
+        [AllowAnonymous]
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {
             var userDetails = await _authrepo.Login(req);
             if (userDetails != null)
             {
-        //         HttpContext.Response.Cookies.Append("user-cookie", JsonSerializer.Serialize(new User()
-        //         {
-        //             Email = userDetails.Email,
-        //             UserName = userDetails.UserName,
-        //             RoleId = userDetails.RoleId
-        //         }),
-        // new CookieOptions
-        // {
-        //     HttpOnly = true,
-        //     Secure = true,
-        //     SameSite = SameSiteMode.Strict
-        // });
-        var token = _jwtservice.GenerateToken(userDetails);
+                //         HttpContext.Response.Cookies.Append("user-cookie", JsonSerializer.Serialize(new User()
+                //         {
+                //             Email = userDetails.Email,
+                //             UserName = userDetails.UserName,
+                //             RoleId = userDetails.RoleId
+                //         }),
+                // new CookieOptions
+                // {
+                //     HttpOnly = true,
+                //     Secure = true,
+                //     SameSite = SameSiteMode.Strict
+                // });
+                var token = _jwtservice.GenerateToken(userDetails);
                 return Ok(new
                 {
                     success = true,
@@ -80,6 +83,16 @@ namespace TaskManager_Backend.Controllers
             {
                 success = false,
                 message = "invalid credentials"
+            });
+        }
+
+        [Authorize(Roles = "1")]
+        [HttpGet("[action]")]
+        public IActionResult Welcome()
+        {
+            return Ok(new
+            {
+                message = "welcome admin"
             });
         }
     }
