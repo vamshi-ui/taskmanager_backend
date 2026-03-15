@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TaskManager.TaskModels;
 
-namespace TaskManager.UserModels;
+namespace TaskManager_Backend.Models;
 
 [Table("tb_users")]
 public class User

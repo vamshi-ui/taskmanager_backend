@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using TaskManager.UserModels;
 
-namespace TaskManager.TaskModels;
+namespace TaskManager_Backend.Models;
 
 public enum TaskStatus
 {

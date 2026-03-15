@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TaskManager.UserModels;
+using TaskManager_Backend.Models;
 
 public class RoleEntityConfig : IEntityTypeConfiguration<Role>
 {

@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TaskManager_Backend.Data;
+using TaskManager_Backend.Interfaces;
+using TaskManager_Backend.Repository;
+using TaskManager_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // register services
@@ -15,6 +18,9 @@ builder.Services.AddDbContext<AppDbContext>(
         .EnableSensitiveDataLogging()
         .EnableDetailedErrors()
 );
+builder.Services.AddScoped<IAuthRepository ,AuthRepository>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+
 
 
 builder.Services.AddControllers();
@@ -27,8 +33,9 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 // handle request pipeline register middlewares , mapcontrollers, routing pipeline, authentication etc
-app.MapControllers();
+app.UseExceptionHandler("/error");
 app.UseSwagger();
 app.UseSwaggerUI();
+app.MapControllers();
 
 app.Run();

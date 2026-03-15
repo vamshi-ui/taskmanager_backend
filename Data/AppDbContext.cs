@@ -1,7 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.TaskModels;
-using TaskManager.UserModels;
+using TaskManager_Backend.Models;
 
 namespace TaskManager_Backend.Data;
 
